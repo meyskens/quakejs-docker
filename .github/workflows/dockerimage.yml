@@ -15,3 +15,7 @@ jobs:
       run: docker build -t ghcr.io/meyskens/quakejs-docker:$GITHUB_SHA .
     - name: Push the image to the registry
       run: docker push ghcr.io/meyskens/quakejs-docker:$GITHUB_SHA
+    - name: Push the image to the registry as latest
+      run: |
+        docker tag ghcr.io/meyskens/quakejs-docker:$GITHUB_SHA ghcr.io/meyskens/quakejs-docker:latest
+        docker push ghcr.io/meyskens/quakejs-docker:latest
