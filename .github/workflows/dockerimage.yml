@@ -2,17 +2,16 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+    - name: Log in to registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag treyyoder/quakejs:latest
+      run: docker build -t ghcr.io/meyskens/quakejs-docker:$GITHUB_SHA .
+    - name: Push the image to the registry
+      run: docker push ghcr.io/meyskens/quakejs-docker:$GITHUB_SHA
