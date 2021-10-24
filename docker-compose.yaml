@@ -2,6 +2,7 @@ version: "3.9"
 services:
   quakejs:
     image: ghcr.io/meyskens/quakejs-docker:latest
+    restart: always
     ports:
       - "80:80"
       - "27960:27960"
