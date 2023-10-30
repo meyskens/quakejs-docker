@@ -1,8 +1,14 @@
-FROM node:12-stretch
+FROM ubuntu:20.04
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install sudo curl git jq apache2 wget apt-utils -y
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=US/Eastern
+
+RUN apt-get update
+RUN apt-get upgrade -y
+
+RUN apt-get install sudo curl git nodejs npm jq apache2 wget apt-utils -y
+
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 RUN git clone --recurse-submodules https://github.com/begleysm/quakejs.git
 WORKDIR /quakejs
