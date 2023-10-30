@@ -21,8 +21,6 @@ COPY ./include/ioq3ded/ioq3ded.fixed.js /quakejs/build/ioq3ded.js
 RUN rm /var/www/html/index.html && cp /quakejs/html/* /var/www/html/
 COPY ./include/assets/ /var/www/html/assets
 
-RUN echo "127.0.0.1 content.quakejs.com" >> /etc/hosts
-
 WORKDIR /
 ADD entrypoint.sh /entrypoint.sh
 # Was having issues with Linux and Windows compatibility with chmod -x, but this seems to work in both
